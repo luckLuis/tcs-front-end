@@ -1,0 +1,164 @@
+<div class="registration-form">
+  <h2>Formulario de Actualización</h2>
+
+  <form (ngSubmit)="updateProduct()">
+    <div class="form-container">
+      <div class="form-column">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input
+            type="text"
+            id="id"
+            name="id"
+            [(ngModel)]="formData.id"
+            required
+            minlength="3"
+            maxlength="10"
+            [disabled]="true"
+            #idField="ngModel"
+            [ngClass]="{ 'input-error': idField.invalid && idField.touched }"
+          />
+          <div *ngIf="idField.errors?.['required']" class="error-message">
+            ID no válido!
+          </div>
+          <div *ngIf="idField.errors?.['minlength']" class="error-message">
+            ID debe tener al menos 3 caracteres.
+          </div>
+          <div *ngIf="idField.errors?.['maxlength']" class="error-message">
+            ID no debe tener más de 10 caracteres!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            [(ngModel)]="formData.description"
+            required
+            minlength="10"
+            maxlength="200"
+            #descriptionField="ngModel"
+            [ngClass]="{
+              'input-error':
+                descriptionField.invalid && descriptionField.touched
+            }"
+          />
+          <div
+            *ngIf="descriptionField.errors?.['required']"
+            class="error-message"
+          >
+            Este campo es requerido!
+          </div>
+          <div
+            *ngIf="descriptionField.errors?.['minlength']"
+            class="error-message"
+          >
+            Descripción debe tener al menos 10 caracteres!
+          </div>
+          <div
+            *ngIf="descriptionField.errors?.['maxlength']"
+            class="error-message"
+          >
+            Descripción no debe tener más de 200 caracteres!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="releaseDate">Fecha Liberación</label>
+          <input
+            type="date"
+            id="releaseDate"
+            name="date_release"
+            [(ngModel)]="formData.date_release"
+            required
+            #releaseDateField="ngModel"
+            [ngClass]="{
+              'input-error':
+                releaseDateField.invalid && releaseDateField.touched
+            }"
+          />
+          <div
+            *ngIf="releaseDateField.errors?.['required']"
+            class="error-message"
+          >
+            Este campo es requerido!
+          </div>
+        </div>
+      </div>
+
+      <div class="form-column right-column">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="formData.name"
+            required
+            minlength="5"
+            maxlength="100"
+            #nameField="ngModel"
+            [ngClass]="{
+              'input-error': nameField.invalid && nameField.touched
+            }"
+          />
+          <div *ngIf="nameField.errors?.['required']" class="error-message">
+            Nombre es requerido!
+          </div>
+          <div *ngIf="nameField.errors?.['minlength']" class="error-message">
+            Nombre debe tener al menos 5 caracteres!
+          </div>
+          <div *ngIf="nameField.errors?.['maxlength']" class="error-message">
+            Nombre no debe tener más de 100 caracteres!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="logo">Logo</label>
+          <input
+            type="text"
+            id="logo"
+            name="logo"
+            [(ngModel)]="formData.logo"
+            required
+            #logoField="ngModel"
+            [ngClass]="{
+              'input-error': logoField.invalid && logoField.touched
+            }"
+          />
+          <div *ngIf="logoField.errors?.['required']" class="error-message">
+            Este campo es requerido!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="revisionDate">Fecha de Revisión</label>
+          <input
+            type="date"
+            id="revisionDate"
+            name="date_revision"
+            [(ngModel)]="formData.date_revision"
+            required
+            disabled
+            #revisionDateField="ngModel"
+            [ngClass]="{
+              'input-error':
+                revisionDateField.invalid && revisionDateField.touched
+            }"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="spinner-container" *ngIf="submittingForm">
+      <div class="spinner"></div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="submit-button">Actualizar</button>
+    </div>
+  </form>
+  <div *ngIf="showToast" [ngClass]="['toast', toastClass]">
+    {{ toastMessage }}
+  </div>
+</div>
