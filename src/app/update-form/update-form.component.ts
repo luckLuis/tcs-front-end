@@ -74,18 +74,20 @@ export class UpdateFormComponent implements OnInit {
 
     const { id, ...productData } = this.formData;
 
-    this.productService.updateProduct(this.authorId, id, productData).subscribe(
-      (response) => {
-        this.submittingForm = false;
-        this.showToastMessage('Datos actualizados correctamente', 'success');
-        this.router.navigate(['/product-list']);
-      },
-      (error) => {
-        this.submittingForm = false;
-        this.showToastMessage('Error al actualizar los datos', 'error');
-        console.error('Error updating product:', error);
-      }
-    );
+    this.productService
+      .updateProduct(this.authorId, id, this.formData)
+      .subscribe(
+        (response) => {
+          this.submittingForm = false;
+          this.showToastMessage('Datos actualizados correctamente', 'success');
+          this.router.navigate(['/products']);
+        },
+        (error) => {
+          this.submittingForm = false;
+          this.showToastMessage('Error al actualizar los datos', 'error');
+          console.error('Error updating product:', error);
+        }
+      );
   }
 
   resetForm(): void {

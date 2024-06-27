@@ -76,6 +76,7 @@ export class ProductService {
   ): Observable<any> {
     const headers = new HttpHeaders().set('authorId', authorId);
     const url = `${this.apiUrl}`;
+    //console.log('Json: ' + JSON.stringify(productData));
     return this.http
       .put<any>(url, productData, { headers })
       .pipe(catchError(this.handleError));
